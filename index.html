@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dissertation Viva: Childhood, Nature, and Emotional Development</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --dark-bg: #0f172a;
+            --surface-bg: #1e293b;
+            --accent: #38bdf8;
+            --primary-text: #f1f5f9;
+            --secondary-text: #cbd5e1;
+            --muted-text: #94a3b8;
+            --success: #10b981;
+        }
+
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background-color: var(--dark-bg);
+            color: var(--primary-text);
+            line-height: 1.6;
+        }
+
+        .presentation-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 30px;
+            background: linear-gradient(135deg, #020617 0%, var(--surface-bg) 100%);
+            border-radius: 10px;
+            border-left: 5px solid var(--accent);
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            color: var(--accent);
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .header p {
+            color: var(--secondary-text);
+            font-size: 1.1em;
+            margin: 5px 0;
+        }
+
+        .controls {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 30px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background-color: var(--accent);
+            color: var(--dark-bg);
+        }
+
+        .btn-primary:hover {
+            background-color: #22d3ee;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(56, 189, 248, 0.4);
+        }
+
+        .btn-secondary {
+            background-color: var(--surface-bg);
+            color: var(--accent);
+            border: 2px solid var(--accent);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--accent);
+            color: var(--dark-bg);
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .slides-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .slide {
+            background-color: var(--surface-bg);
+            border-radius: 12px;
+            padding: 30px;
+            border-left: 5px solid var(--accent);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            display: none;
+        }
+
+        .slide.active {
+            display: block;
+            animation: slideIn 0.5s ease;
+            grid-column: 1 / -1;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .slide-number {
+            display: inline-block;
+            background-color: var(--accent);
+            color: var(--dark-bg);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .slide h2 {
+            font-size: 2.2em;
+            color: var(--accent);
+            margin-bottom: 20px;
+            border-bottom: 2px solid var(--accent);
+            padding-bottom: 15px;
+        }
+
+        .slide h3 {
+            font-size: 1.4em;
+            color: var(--accent);
+            margin-top: 20px;
+            margin-bottom: 12px;
+        }
+
+        .slide p {
+            color: var(--secondary-text);
+            margin-bottom: 15px;
+            line-height: 1.8;
+        }
+
+        .slide ul, .slide ol {
+            margin-left: 25px;
+            margin-bottom: 15px;
+        }
+
+        .slide li {
+            color: var(--secondary-text);
+            margin-bottom: 10px;
+            line-height: 1.7;
+        }
+
+        .slide li strong {
+            color: var(--accent);
+        }
+
+        .visual-content {
+            margin: 25px 0;
+            padding: 20px;
+            background-color: rgba(56, 189, 248, 0.1);
+            border-radius: 8px;
+            border: 2px solid var(--accent);
+        }
+
+        .visual-content img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+
+        .diagram-section {
+            background-color: rgba(56, 189, 248, 0.05);
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 4px solid var(--success);
+        }
+
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .column {
+            background-color: rgba(56, 189, 248, 0.05);
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid var(--accent);
+        }
+
+        .column h4 {
+            color: var(--accent);
+            margin-bottom: 12px;
+            font-size: 1.1em;
+        }
+
+        .stat-box {
+            background-color: rgba(56, 189, 248, 0.1);
+            padding: 15px;
+            border-radius: 8px;
+            margin: 10px 0;
+            border-left: 4px solid var(--success);
+        }
+
+        .stat-box strong {
+            color: var(--accent);
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .quote {
+            font-style: italic;
+            color: var(--accent);
+            padding: 15px;
+            border-left: 4px solid var(--accent);
+            margin: 15px 0;
+            background-color: rgba(56, 189, 248, 0.05);
+        }
+
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 30px;
+            padding: 20px;
+            background-color: var(--surface-bg);
+            border-radius: 8px;
+        }
+
+        .slide-counter {
+            color: var(--accent);
+            font-weight: bold;
+        }
+
+        .stage-indicator {
+            display: inline-block;
+            background-color: var(--accent);
+            color: var(--dark-bg);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            margin: 5px;
+            font-weight: bold;
+        }
+
+        .key-insight {
+            background-color: rgba(16, 185, 129, 0.1);
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid var(--success);
+            margin: 20px 0;
+        }
+
+        .key-insight strong {
+            color: var(--success);
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .comparison-table {
+            width: 100%;
+            margin: 20px 0;
+            border-collapse: collapse;
+        }
+
+        .comparison-table th {
+            background-color: var(--accent);
+            color: var(--dark-bg);
+            padding: 12px;
+            text-align: left;
+            font-weight: bold;
+        }
+
+        .comparison-table td {
+            padding: 12px;
+            border-bottom: 1px solid var(--accent);
+            color: var(--secondary-text);
+        }
+
+        .comparison-table tr:nth-child(even) {
+            background-color: rgba(56, 189, 248, 0.05);
+        }
+
+        .findings-box {
+            background-color: rgba(56, 189, 248, 0.1);
+            padding: 20px;
+            border-radius: 8px;
+            border: 2px solid var(--accent);
+            margin: 15px 0;
+        }
+
+        .findings-box h4 {
+            color: var(--accent);
+            margin-bottom: 10px;
+        }
+
+        .timeline {
+            position: relative;
+            padding: 20px 0;
+        }
+
+        .timeline-item {
+            padding: 15px;
+            margin: 10px 0;
+            background-color: rgba(56, 189, 248, 0.05);
+            border-left: 4px solid var(--accent);
+            border-radius: 4px;
+        }
+
+        .timeline-item strong {
+            color: var(--accent);
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        @media (max-width: 768px) {
+            .two-column {
+                grid-template-columns: 1fr;
+            }
+
+            .header h1 {
+                font-size: 1.8em;
+            }
+
+            .slide {
+                padding: 20px;
+            }
+
+            .slide h2 {
+                font-size: 1.6em;
+            }
+        }
+
+        .footer {
+            text-align: center;
+            padding: 20px;
+            color: var(--muted-text);
+            margin-top: 40px;
+            border-top: 1px solid var(--surface-bg);
+        }
+
+        .content-section {
+            margin: 25px 0;
+            padding: 20px;
+            background-color: rgba(56, 189, 248, 0.05);
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="presentation-container">
+        <!-- Header -->
+        <div class="header">
+            <h1>Childhood, Nature, and Emotional Development</h1>
+            <p><strong>An Ecocritical and Psychological Study of Ruskin Bond's Rusty, the Boy from the Hills</strong></p>
+            <p style="margin-top: 15px; font-size: 0.95em;">
+                <strong>Research Scholar:</strong> SAMIRAN DOLEY | 
+                <strong>Supervisor:</strong> Dr. Gautam Chatterjee | 
+                <strong>Degree:</strong> Master of Arts in English
+            </p>
+            <p style="color: var(--muted-text);">Lovely Professional University</p>
+        </div>
+
+        <!-- Controls -->
+        <div class="controls">
+            <button class="btn btn-secondary" id="prevBtn" onclick="changeSlide(-1)">← Previous</button>
+            <button class="btn btn-primary" id="homeBtn" onclick="goToSlide(0)">Home</button>
+            <select id="slideSelect" class="btn btn-secondary" onchange="goToSlide(parseInt(this.value))">
+                <option value="0">Slide 1: Title</option>
+                <option value="1">Slide 2: Core Thesis</option>
+                <option value="2">Slide 3: Framework</option>
+                <option value="3">Slide 4: Finding 1</option>
+                <option value="4">Slide 5: Finding 2</option>
+                <option value="5">Slide 6: Significance</option>
+                <option value="6">Slide 7: Closing</option>
+            </select>
+            <button class="btn btn-secondary" id="nextBtn" onclick="changeSlide(1)">Next →</button>
+        </div>
+
+        <!-- Slides -->
+        <div class="slides-container">
+            <!-- SLIDE 1: TITLE SLIDE -->
+            <div class="slide active">
+                <div class="slide-number">SLIDE 1 / 7</div>
+                <h2>Childhood, Nature, and Emotional Development</h2>
+                <div style="text-align: center; margin: 40px 0;">
+                    <p style="font-size: 1.3em; color: var(--accent); margin: 20px 0;">An Ecocritical and Psychological Study of</p>
+                    <p style="font-size: 1.5em; color: var(--accent); font-weight: bold; margin: 20px 0;">Ruskin Bond's Rusty, the Boy from the Hills</p>
+                </div>
+                <div class="visual-content" style="text-align: center;">
+                    <img src="https://pplx-res.cloudinary.com/image/upload/v1765382368/search_images/20f79bf3febf646fff6ea1e366b6897d74c8417f.jpg" alt="Himalayan Mountain Landscape" style="max-height: 300px; object-fit: cover;">
+                </div>
+                <div style="text-align: center; margin-top: 30px;">
+                    <div style="background-color: var(--surface-bg); padding: 20px; border-radius: 8px;">
+                        <p style="margin: 8px 0;"><strong style="color: var(--accent);">Research Scholar:</strong> SAMIRAN DOLEY</p>
+                        <p style="margin: 8px 0;"><strong style="color: var(--accent);">Supervisor:</strong> Dr. Gautam Chatterjee</p>
+                        <p style="margin: 8px 0;"><strong style="color: var(--accent);">Degree:</strong> Master of Arts in English</p>
+                        <p style="margin: 8px 0; color: var(--muted-text);">Lovely Professional University</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SLIDE 2: THE CORE THESIS -->
+            <div class="slide">
+                <div class="slide-number">SLIDE 2 / 7</div>
+                <h2>The Core Thesis: Nature is a Dynamic Agent</h2>
+                
+                <div class="findings-box">
+                    <h4>Research Gap</h4>
+                    <p>Traditional criticism views nature as merely a <strong>"backdrop for adventure."</strong> This research asks: <strong>What if nature is not ornamental but essential to understanding Rusty's emotional economy?</strong></p>
+                </div>
+
+                <div class="findings-box">
+                    <h4>Core Thesis</h4>
+                    <p>This study performs a <strong>structural analysis of nature's functional role in the child's emotional economy</strong>—nature as a living, active presence that meets Rusty's emotional needs that human relationships fail to meet.</p>
+                    <ul>
+                        <li>Unconditional acceptance (what the human world denies)</li>
+                        <li>Consistent presence (what family relationships lack)</li>
+                        <li>Space for imaginative freedom (what authority figures restrict)</li>
+                        <li>Silent moral education (what institutional schooling cannot provide)</li>
+                        <li>Emotional validation (what guardians fail to offer)</li>
+                    </ul>
+                </div>
+
+                <div class="key-insight">
+                    <strong>Key Claim</strong>
+                    The Himalayan landscape is a <strong>central, dynamic agent</strong> in Rusty's identity crisis resolution and lifelong resilience. Not incidental but <strong>essential.</strong> Not supplementary but <strong>primary.</strong>
+                </div>
+            </div>
+
+            <!-- SLIDE 3: INTERDISCIPLINARY FRAMEWORK -->
+            <div class="slide">
+                <div class="slide-number">SLIDE 3 / 7</div>
+                <h2>Interdisciplinary Framework</h2>
+                
+                <div class="visual-content" style="text-align: center;">
+                    <img src="https://ppl-ai-code-interpreter-files.s3.amazonaws.com/web/direct-files/1ace9a7be0253cb2ea6c95d7144ca2c7/a4e28f4b-1398-48e3-a6aa-6f329c787a45/5a168e3e.png" alt="Framework Venn Diagram" style="max-height: 400px; object-fit: cover;">
+                    <p style="color: var(--muted-text); font-size: 0.9em; margin-top: 10px;">Three disciplines intersecting to reveal nature's role as a dynamic agent</p>
+                </div>
+
+                <div class="two-column">
+                    <div class="column">
+                        <h4>ECOCRITICISM</h4>
+                        <ul>
+                            <li><strong>Definition:</strong> Study of literature and physical environment</li>
+                            <li><strong>Nature as Living Force:</strong> Environment actively shapes consciousness</li>
+                            <li><strong>Deep Ecology:</strong> Nature has intrinsic value</li>
+                            <li><strong>Environmental Healing:</strong> Nature provides psychological restoration (Buell)</li>
+                            <li><strong>Ecological Identity:</strong> Self rooted in place</li>
+                        </ul>
+                    </div>
+                    <div class="column">
+                        <h4>CHILD PSYCHOLOGY</h4>
+                        <ul>
+                            <li><strong>Erikson's Identity Stage:</strong> Adolescent identity crisis resolution</li>
+                            <li><strong>Rogers' Freedom & Trust:</strong> Children thrive in permissive environments</li>
+                            <li><strong>Secure Attachment:</strong> Reliable presence for development</li>
+                            <li><strong>Attention Restoration Theory:</strong> Natural spaces heal directed attention fatigue</li>
+                            <li><strong>Resilience Building:</strong> Emotional strength through nature contact</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="key-insight">
+                    <strong>The Integration</strong>
+                    Ecocriticism reveals nature as dynamic. Child psychology explains why children need such environments. Together: <strong>Bond argues for ecological conditions necessary for healthy childhood development.</strong>
+                </div>
+            </div>
+
+            <!-- SLIDE 4: FINDING 1 - NATURE AS PARENTAL FIGURE -->
+            <div class="slide">
+                <div class="slide-number">SLIDE 4 / 7</div>
+                <h2>Finding 1: Nature as Parental Figure</h2>
+
+                <div class="visual-content">
+                    <img src="https://pplx-res.cloudinary.com/image/upload/v1763878689/search_images/ebb46c4e8deb15c47f809e053823c8da048c1cb8.jpg" alt="Child in Nature Forest Learning" style="max-height: 300px; object-fit: cover; display: block; margin: 0 auto;">
+                </div>
+
+                <h3>Ecological Substitution: Why Nature Becomes Parent</h3>
+                <p>Rusty's family situation: Mother left at early age, father died at 11, distant guardians. The natural world becomes <strong>not optional but necessary</strong>—functionally substituting for absent parental structure.</p>
+
+                <div class="findings-box">
+                    <h4>Role 1: Nurturing - Unconditional Acceptance</h4>
+                    <p>The hills <strong>do not evaluate Rusty.</strong> They accept him as he is—lonely, imaginative, sensitive, alienated from the human world.</p>
+                    <div class="quote">"When I was alone among the hills, I never felt lonely." — Rusty</div>
+                    <p>Nature provides <strong>physical sanctuary</strong>—a space of refuge where healing occurs without judgment or correction.</p>
+                </div>
+
+                <div class="findings-box">
+                    <h4>Role 2: Teaching - Silent Moral Educator</h4>
+                    <p>Nature educates Rusty through <strong>lived experience and observation</strong>:</p>
+                    <ul>
+                        <li><strong>Patience:</strong> Slow growth of trees, gradual seasonal change</li>
+                        <li><strong>Humility:</strong> Individual insignificance within vast ecosystems</li>
+                        <li><strong>Interdependence:</strong> All living things depend on one another</li>
+                        <li><strong>Resilience:</strong> Forests recover from storms, rivers persist through droughts</li>
+                    </ul>
+                    <p>This creates an <strong>"ecological identity"</strong>—a sense of self fundamentally rooted in place, becoming the foundation for emotional stability and psychological resilience.</p>
+                </div>
+
+                <div class="key-insight">
+                    <strong>The Functional Argument</strong>
+                    Nature performs essential parental functions: unconditional acceptance, consistent presence, emotional attunement, moral education, secure attachment. <strong>Therefore, it functions as a parent.</strong>
+                </div>
+            </div>
+
+            <!-- SLIDE 5: FINDING 2 - IDENTITY AND RESILIENCE -->
+            <div class="slide">
+                <div class="slide-number">SLIDE 5 / 7</div>
+                <h2>Finding 2: Identity and Resilience</h2>
+
+                <div class="visual-content">
+                    <img src="https://pplx-res.cloudinary.com/image/upload/v1765382367/search_images/c3c307e6474b05d4575d7baef70dc7600c5f28b1.jpg" alt="Emotional Resilience Development" style="max-height: 300px; object-fit: cover; display: block; margin: 0 auto;">
+                </div>
+
+                <h3>Psychological Liberation: Freedom as Developmental Necessity</h3>
+                <p>Rusty is trapped between English colonial authority and Indian authenticity. Colonial society prescribes roles (obedient child, good student) that create a <strong>"false self"</strong> preventing genuine development.</p>
+                <div class="quote">"I had no roof but the sky, no walls but the surrounding hills." — Rusty</div>
+                <p><strong>Nature provides psychological liberation.</strong> In forests and hills, Rusty experiences <strong>freedom and trust</strong>—he can be himself without performance, explore identity safely, express authentic desires without judgment.</p>
+
+                <h3>Identity Formation: Ecological Anchoring of Self</h3>
+                <div class="findings-box">
+                    <p><strong>Rusty's identity becomes ecologically anchored</strong>—rooted in relationship to the Himalayan landscape, not in prescribed social roles.</p>
+                    <div class="two-column">
+                        <div style="background: none; padding: 0; border: none;">
+                            <strong style="color: var(--accent);">Continuity</strong>
+                            <p>Hills connect childhood to adulthood. Trees remain. Rivers flow. Creates temporal continuity and sense of roots.</p>
+                        </div>
+                        <div style="background: none; padding: 0; border: none;">
+                            <strong style="color: var(--accent);">Authenticity</strong>
+                            <p>Identity emerges from genuine nature engagement—lived, not performed. Psychologically strengthening.</p>
+                        </div>
+                    </div>
+                    <div class="two-column">
+                        <div style="background: none; padding: 0; border: none;">
+                            <strong style="color: var(--accent);">Belonging</strong>
+                            <p>Rusty belongs to nature's ecosystem and landscape. Addresses fundamental need for community despite human alienation.</p>
+                        </div>
+                        <div style="background: none; padding: 0; border: none;">
+                            <strong style="color: var(--accent);">Autonomy</strong>
+                            <p>Internal identity. Built through personal experience. Inherently autonomous and resistant to external control.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <h3>Emotional Resilience: Building Psychological Strength</h3>
+                <p><strong>Resilience factors provided by nature:</strong></p>
+                <ul>
+                    <li><strong>Secure Attachment:</strong> When distressed, Rusty finds comfort in nature. Landscape is reliably present.</li>
+                    <li><strong>Autonomy:</strong> Nature doesn't impose roles. Rusty develops agency through making choices.</li>
+                    <li><strong>Sense of Efficacy:</strong> Climbing mountains, understanding ecosystems develops competence.</li>
+                    <li><strong>Emotional Regulation:</strong> Through natural rhythms, Rusty processes emotions and returns to equilibrium.</li>
+                    <li><strong>Sense of Meaning:</strong> Natural world provides existential meaning, wonder, and spiritual dimensions.</li>
+                </ul>
+
+                <div class="key-insight">
+                    <strong>Resolution: Successful Achievement of Developmental Milestones</strong>
+                    By novel's end, Rusty achieves coherent identity, develops fidelity to authentic self, builds lifelong emotional resilience. <strong>Not accidental—enabled by nature's role as parent, teacher, liberator, and anchor.</strong>
+                </div>
+            </div>
+
+            <!-- SLIDE 6: SIGNIFICANCE & FUTURE DIRECTION -->
+            <div class="slide">
+                <div class="slide-number">SLIDE 6 / 7</div>
+                <h2>Significance & Future Direction</h2>
+
+                <h3>Study's Significance</h3>
+                <div class="stat-box">
+                    <strong>Original Contribution</strong>
+                    First systematic ecocritical and psychological analysis of Bond's novel. Bond's work read through postcolonial and coming-of-age lenses, but <strong>never before analyzed for nature's structural role in emotional development.</strong>
+                </div>
+
+                <div class="stat-box">
+                    <strong>Scientific Validation</strong>
+                    Empirically proves what environmental psychology demonstrates: <strong>natural world is necessary, not optional, for healthy child development.</strong> Bond's narrative = literary case study in environmental healing.
+                </div>
+
+                <div class="stat-box">
+                    <strong>Methodological Innovation</strong>
+                    Reconceptualizes nature in literature studies. Reading nature as character (not backdrop), as agent (not setting), as necessary (not ornamental) opens new interpretive possibilities.
+                </div>
+
+                <h3>Broader Implications</h3>
+                <div class="content-section">
+                    <strong style="color: var(--success); display: block; margin-bottom: 10px;">1. Child Development & Education</strong>
+                    <p>If ecological identity is foundational to resilience, education must prioritize nature contact. Current institutional models may be psychologically harmful.</p>
+                </div>
+
+                <div class="content-section">
+                    <strong style="color: var(--success); display: block; margin-bottom: 10px;">2. Environmental Crisis & Psychology</strong>
+                    <p>Crisis is not merely ecological but psychological. Human identity and resilience rooted in nature—environmental destruction damages psychological health fundamentally.</p>
+                </div>
+
+                <div class="content-section">
+                    <strong style="color: var(--success); display: block; margin-bottom: 10px;">3. Trauma & Healing</strong>
+                    <p>Nature can be primary therapeutic modality for trauma. Rusty's abandonment and neglect are healed through nature contact, not primarily human relationship.</p>
+                </div>
+
+                <div class="content-section">
+                    <strong style="color: var(--success); display: block; margin-bottom: 10px;">4. Urbanization & Mental Health</strong>
+                    <p>Rising childhood anxiety, depression, identity confusion correlate with urbanization and nature deprivation. Children lack ecological anchoring for psychological resilience.</p>
+                </div>
+
+                <div class="content-section">
+                    <strong style="color: var(--success); display: block; margin-bottom: 10px;">5. Ecocritical Methodology</strong>
+                    <p>Literary analysis contributes to environmental philosophy and psychology. Literature is wisdom source about human-nature relationships that inform scientific discussion.</p>
+                </div>
+
+                <div class="key-insight">
+                    <strong>Central Insight</strong>
+                    An <strong>ecological identity is a foundation for a resilient adult.</strong> Bond reminds us: children belong to the natural world as much as to human society. Nature is not luxury but necessity for healthy development.
+                </div>
+            </div>
+
+            <!-- SLIDE 7: CLOSING -->
+            <div class="slide">
+                <div class="slide-number">SLIDE 7 / 7</div>
+                <h2 style="text-align: center;">Thank You</h2>
+                
+                <div style="text-align: center; margin: 50px 0;">
+                    <p style="font-size: 1.3em; color: var(--accent); margin: 20px 0;">Questions and Feedback Welcome</p>
+                </div>
+
+                <div style="background-color: var(--surface-bg); padding: 30px; border-radius: 8px; text-align: center; margin: 40px 0;">
+                    <p style="font-size: 1.2em; color: var(--accent); margin-bottom: 15px;"><strong>SAMIRAN DOLEY</strong></p>
+                    <p style="color: var(--secondary-text); margin: 10px 0;">Email: samirandoley66@gmail.com</p>
+                    <p style="color: var(--muted-text); margin: 10px 0;">Department of English | Lovely Professional University</p>
+                </div>
+
+                <div class="key-insight" style="text-align: center;">
+                    <strong style="display: block; margin-bottom: 15px;">Three Core Claims</strong>
+                    <p style="margin: 10px 0;">1. Nature functions as a parental figure, providing nurturing and education</p>
+                    <p style="margin: 10px 0;">2. Nature facilitates identity formation and psychological resilience</p>
+                    <p style="margin: 10px 0;">3. Ecological identity is foundational to emotional wellbeing</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation -->
+        <div class="navigation">
+            <button class="btn btn-secondary" id="prevBtn2" onclick="changeSlide(-1)">← Previous</button>
+            <span class="slide-counter"><span id="currentSlide">1</span> / 7</span>
+            <button class="btn btn-secondary" id="nextBtn2" onclick="changeSlide(1)">Next →</button>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>Dissertation Viva Presentation | Childhood, Nature, and Emotional Development | Ruskin Bond's Rusty, the Boy from the Hills</p>
+        <p>© 2025 SAMIRAN DOLEY | Lovely Professional University</p>
+    </div>
+
+    <script>
+        let currentSlideIndex = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+
+        function showSlide(n) {
+            slides.forEach(slide => slide.classList.remove('active'));
+            if (n >= totalSlides) currentSlideIndex = totalSlides - 1;
+            if (n < 0) currentSlideIndex = 0;
+            slides[currentSlideIndex].classList.add('active');
+            document.getElementById('currentSlide').textContent = currentSlideIndex + 1;
+            document.getElementById('slideSelect').value = currentSlideIndex;
+            
+            // Update button states
+            document.getElementById('prevBtn').disabled = currentSlideIndex === 0;
+            document.getElementById('prevBtn2').disabled = currentSlideIndex === 0;
+            document.getElementById('nextBtn').disabled = currentSlideIndex === totalSlides - 1;
+            document.getElementById('nextBtn2').disabled = currentSlideIndex === totalSlides - 1;
+            
+            // Scroll to top
+            window.scrollTo(0, 0);
+        }
+
+        function changeSlide(n) {
+            currentSlideIndex += n;
+            showSlide(currentSlideIndex);
+        }
+
+        function goToSlide(n) {
+            currentSlideIndex = n;
+            showSlide(currentSlideIndex);
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft') changeSlide(-1);
+            if (e.key === 'ArrowRight') changeSlide(1);
+        });
+
+        // Initialize
+        showSlide(0);
+    </script>
+</body>
+</html>
